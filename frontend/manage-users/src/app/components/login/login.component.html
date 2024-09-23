@@ -1,0 +1,7 @@
+@if (!authService.isLoggedIn()) {
+<button (click)="byGoogle()">Sign in with Google</button>
+<button (click)="anonymously()">Sign in as anonymous</button>
+<div id="firebaseui-auth-container"></div>
+} @else {
+<h2>Welcome</h2>
+}

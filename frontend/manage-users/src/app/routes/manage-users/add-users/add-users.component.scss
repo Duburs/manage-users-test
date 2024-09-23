@@ -1,0 +1,24 @@
+.add-users-container {
+  display: flex;
+  flex-direction: column;
+
+  .add-users-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .add-users-single-user {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+  }
+
+  .add-users-add-user {
+    margin-top: 20px;
+  }
+
+  input.ng-invalid.ng-touched {
+    border: 2px solid red;
+  }
+}

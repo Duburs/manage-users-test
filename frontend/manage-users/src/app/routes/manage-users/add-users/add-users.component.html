@@ -1,0 +1,30 @@
+<div class="add-users-container">
+  <h2>Add Users</h2>
+
+  @for (userForm of addUserForm.controls; track $index) {
+  <div class="add-users-single-user" [formGroup]="userForm">
+    <div class="add-users-field">
+      <label [for]="'username-' + $index"> Username </label>
+      <input
+        [id]="'username-' + $index"
+        [formControl]="userForm.controls.username"
+      />
+    </div>
+
+    <div class="add-users-field">
+      <label [for]="'role-' + $index"> Role </label>
+      <input [formControl]="userForm.controls.role" />
+    </div>
+    <button (click)="remove($index)">remove this user</button>
+  </div>
+  }
+
+  <!-- I would have this be a + icon instead of a button -->
+  <button class="add-users-add-user" (click)="addNewUser()">
+    Add another user
+  </button>
+
+  <div>
+    <button (click)="submit()">Submit</button>
+  </div>
+</div>
