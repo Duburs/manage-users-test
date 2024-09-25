@@ -23,7 +23,7 @@ interface UserForm {
   username: FormControl<string | null>;
 }
 
-const userExistsValidator: ValidatorFn = (
+const selectedRoleValidator: ValidatorFn = (
   formGroup: AbstractControl
 ): ValidationErrors | null => {
   const role = formGroup.value;
@@ -58,6 +58,7 @@ export class AddUsersComponent {
     this.addNewUser();
   }
 
+  // Adds a new entry to the form array which represents one user.
   addNewUser(): void {
     this.addUserForm.push(
       this.fb.group<UserForm>({
@@ -66,7 +67,7 @@ export class AddUsersComponent {
         }),
         role: this.fb.control('Select a role', {
           validators: [
-            userExistsValidator,
+            selectedRoleValidator,
             Validators.required,
             Validators.minLength(1),
           ],
@@ -87,9 +88,15 @@ export class AddUsersComponent {
     }
 
     let data = this.addUserForm.value as User[];
-    this.usersDataService.addUsers(data).subscribe(() => {
-      this.addUserForm.clear();
-      this.router.navigate(['/manage-users/view']);
+    this.usersDataService.addUsers(data).subscribe({
+      next: () => {
+        this.addUserForm.clear();
+        this.router.navigate(['/manage-users/view']);
+      },
+      error: (err) => {
+        // Should push to a notification type service which doesn't exist yet.
+        alert('An error occurred');
+      },
     });
   }
 }

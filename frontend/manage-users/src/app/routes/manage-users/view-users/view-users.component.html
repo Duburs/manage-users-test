@@ -2,11 +2,12 @@
   <h2>View Users</h2>
   <p>
     Here you can view all the users in the system. You can filter them by
-    username and role.
+    username and role. Double click on a field if you want to edit the details.
+    The user needs to be enabled to be edited.
   </p>
   <p>
-    Double click on a field if you want to edit the details. The user needs to
-    be enabled to be edited.
+    You can also delete a user by clicking on the delete button if you are
+    logged in using the either of the buttons in the header.
   </p>
   <div class="view-users-actions">
     <a routerLink="/manage-users/add">Add Users</a>
@@ -32,7 +33,7 @@
 
   <ag-grid-angular
     class="view-users-table ag-theme-quartz"
-    [rowData]="rowData | async"
+    [rowData]="rowData$ | async"
     [columnDefs]="colDefs"
     [gridOptions]="gridOptions"
   />

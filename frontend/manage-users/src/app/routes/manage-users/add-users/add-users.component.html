@@ -20,8 +20,8 @@
       ></app-dropdown>
     </label>
 
+    <!-- Disallows removing the first user to ensure there is always at least 1 added -->
     @if($index !== 0) {
-
     <button class="add-users-action-button" (click)="remove($index)">
       <b> - Remove this user </b>
     </button>
@@ -30,7 +30,6 @@
   </div>
   }
 
-  <!-- I would have this be a + icon instead of a button -->
   <button class="add-users-action-button" (click)="addNewUser()">
     <b> + Add additional user </b>
   </button>

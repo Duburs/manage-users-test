@@ -39,8 +39,11 @@ export class UsersDataService {
   private firestore = inject(Firestore);
   private functions = inject(Functions);
 
+  // BehaviorSubject which stores the current data source of the users
+  // It can either be the entire collection or a filtered collection.
   private currentDataSource$ = new BehaviorSubject<SourceType>(SourceType.ALL);
 
+  // Collection reference to the users
   private userCollection = collection(this.firestore, 'users');
 
   allUsers$: Observable<User[]> = collectionData(this.userCollection, {
@@ -48,6 +51,8 @@ export class UsersDataService {
   });
   filteredUsers$!: Observable<User[]>;
 
+  // Anything listening to this observable will get the current data source and won't have to
+  // worry about the implementation details of how the data is being fetched.
   currentData$: Observable<User[]> = this.currentDataSource$.pipe(
     switchMap((source) => {
       if (source === SourceType.ALL) {
@@ -57,6 +62,7 @@ export class UsersDataService {
     })
   );
 
+  // Adds users to the user collection
   addUsers(users: User[]): Observable<void> {
     let batch = writeBatch(this.firestore);
     users.forEach((user) => {
@@ -72,6 +78,7 @@ export class UsersDataService {
     return from(updateDoc(doc(this.userCollection, user.id), { ...user }));
   }
 
+  // Sets filters and updates the data source
   filterData(username: string, role: string): void {
     if (!username && !role) {
       this.clearFilters();
@@ -112,8 +119,10 @@ export class UsersDataService {
   removeUser(userId: string): any {
     from(httpsCallable(this.functions, 'removeUser')({ id: userId })).subscribe(
       {
+        // If it doesn't error it's a success
         next: (res: any) => {},
         error: (err) => {
+          // This can be an auth error or a server error
           alert('Failed to remove user');
           return err;
         },

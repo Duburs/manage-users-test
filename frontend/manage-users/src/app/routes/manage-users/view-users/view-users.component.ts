@@ -33,7 +33,7 @@ import { debounceTime, Subject } from 'rxjs';
 export class ViewUsersComponent {
   usersDataService = inject(UsersDataService);
 
-  rowData = this.usersDataService.currentData$;
+  rowData$ = this.usersDataService.currentData$;
 
   roles = Object.values(Roles);
 
@@ -43,7 +43,7 @@ export class ViewUsersComponent {
   // Provides a default option for the role filter dropdown.
   roleFilterValue = 'filter by a role';
 
-  // Column Definitions: Defines the columns to be displayed.
+  // Sets up the col definitions for ag-grid.
   colDefs: ColDef[] = [
     {
       field: 'enabled',
@@ -119,6 +119,8 @@ export class ViewUsersComponent {
       _roleFilterValue = '';
     }
 
+    // Calls the data service to update the source of the data. It'll be reflected in the
+    // currentData$ observable.
     this.usersDataService.filterData(
       this.usernameFilterValue,
       _roleFilterValue

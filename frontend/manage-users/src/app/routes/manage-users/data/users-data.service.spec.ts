@@ -14,7 +14,6 @@ import { getDatabase } from 'firebase/database';
 import { getFirestore } from 'firebase/firestore';
 import { getFunctions } from 'firebase/functions';
 import { routes } from '../../../app.routes';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 describe('UsersDataService', () => {
   let service: UsersDataService;

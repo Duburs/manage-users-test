@@ -26,7 +26,8 @@ export const removeUser = onRequest(
     // logger.info("Request:", request.body);
 
     // Check if the request has an authorization header,
-    // normally we'd verify and decode the token and check if the user is allowed to perform the action
+    // normally we'd verify and decode the token and check
+    // if the user is allowed to perform the action
     // but I only have logged in / out state
     if (!request.headers.authorization) {
       response.status(401);
@@ -34,6 +35,7 @@ export const removeUser = onRequest(
       return;
     }
 
+    // user id to delete
     const id = request.body.data.id;
 
     if (!id) {

@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -44,8 +38,8 @@ export class DropdownComponent implements ControlValueAccessor {
     }
   }
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  public onChange: (value: string) => void = () => {};
+  public onTouched: () => void = () => {};
 
   public writeValue(value: string): void {
     this.value = value;
