@@ -76,7 +76,7 @@ export class AddUsersComponent {
   }
 
   remove(index: number): void {
-    this.addUserForm.removeAt(index - 1);
+    this.addUserForm.removeAt(index);
   }
 
   submit(): void {

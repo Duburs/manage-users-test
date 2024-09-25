@@ -27,14 +27,15 @@ import {
 })
 export class DropdownComponent implements ControlValueAccessor {
   @Input() items: unknown[] = [];
+  @Input() placeholder: string = 'Select an option';
+  @Input() required: boolean = false;
 
-  private _value: string = 'Select a role';
+  private _value: string = this.placeholder;
   //get accessor
   get value(): string {
     return this._value;
   }
 
-  //set accessor including call the onchange callback
   set value(v: string) {
     if (v !== this._value) {
       this._value = v;

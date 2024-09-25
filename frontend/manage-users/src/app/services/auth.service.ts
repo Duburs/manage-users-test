@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Auth } from '@angular/fire/auth';
+import { Auth, User } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Auth } from '@angular/fire/auth';
 export class AuthService {
   private auth = inject(Auth);
 
-  private user$ = new Observable((obs) => {
+  private user$: Observable<User | null> = new Observable((obs) => {
     return this.auth.onAuthStateChanged(
       (user) => {
         return obs.next(user);
@@ -25,6 +25,6 @@ export class AuthService {
   private user = toSignal(this.user$);
 
   uid = computed(() => {
-    return this.user();
+    return this.user()?.displayName ?? 'anonymous';
   });
 }

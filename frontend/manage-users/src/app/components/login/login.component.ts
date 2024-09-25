@@ -21,11 +21,17 @@ export class LoginComponent {
 
   constructor(public authService: AuthService) {}
 
+  ngOnInit(): void {}
+
   byGoogle(): Promise<UserCredential> {
     return signInWithPopup(this.auth, new GoogleAuthProvider());
   }
 
   anonymously(): Promise<UserCredential> {
     return signInAnonymously(this.auth);
+  }
+
+  logout(): void {
+    this.auth.signOut();
   }
 }

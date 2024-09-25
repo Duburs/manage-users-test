@@ -1,15 +1,22 @@
 .view-users-filters-container {
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
-  margin-bottom: 20px;
-  .view-users-filter-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-}
-
-.view-users-table {
-  height: 80%;
+  height: 90%;
   width: 100%;
+  justify-content: space-between;
+
+  .view-users-table {
+    height: 100%;
+  }
+
+  .view-users-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .view-users-filter-by-role {
+      margin-left: 5px;
+    }
+  }
 }

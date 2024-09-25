@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import {
   Firestore,
-  Query,
   collection,
   collectionData,
   doc,
@@ -13,7 +11,14 @@ import {
   writeBatch,
 } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { BehaviorSubject, from, map, Observable, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  from,
+  map,
+  Observable,
+  switchMap,
+} from 'rxjs';
 
 export interface User {
   role: string;
@@ -55,7 +60,7 @@ export class UsersDataService {
   addUsers(users: User[]): Observable<void> {
     let batch = writeBatch(this.firestore);
     users.forEach((user) => {
-      const _user = { creation_date: new Date(), disabled: false, ...user };
+      const _user = { creation_date: new Date(), enabled: true, ...user };
       batch.set(doc(this.userCollection), _user);
     });
     return from(batch.commit());
@@ -68,12 +73,17 @@ export class UsersDataService {
   }
 
   filterData(username: string, role: string): void {
+    console.log('Filtering data', username, role);
     if (!username && !role) {
       this.clearFilters();
       return;
     }
 
     let q = query(this.userCollection);
+
+    /** These queries should be doing a prefix search https://stackoverflow.com/questions/46568142/google-firestore-query-on-substring-of-a-property-value-text-search
+     * Obviously it would probably be more efficient to use a search engine like ElasticSearch */
+
     if (role) {
       q = query(
         q,
@@ -83,8 +93,6 @@ export class UsersDataService {
     }
 
     if (username) {
-      /** This should be doing a prefix search https://stackoverflow.com/questions/46568142/google-firestore-query-on-substring-of-a-property-value-text-search
-       * Obviously it would probably be more efficient to use a search engine like ElasticSearch */
       q = query(
         q,
         where('username', '>=', username),
@@ -103,7 +111,15 @@ export class UsersDataService {
   }
 
   removeUser(userId: string): any {
-    httpsCallable(this.functions, 'removeUser')();
+    from(httpsCallable(this.functions, 'removeUser')({ id: userId })).subscribe(
+      {
+        next: (res: any) => {},
+        error: (err) => {
+          alert('Failed to remove user');
+          return err;
+        },
+      }
+    );
   }
 
   clearFilters() {

@@ -1,6 +1,8 @@
-<select id="add-users-dropdown" [(ngModel)]="value">
-  <option disabled>Select a role</option>
-  @for (item of items; track $index) {
-  <option [value]="item">{{ item }}</option>
+<select [(ngModel)]="value">
+  <option class="dropdown-placeholder" disabled>{{ placeholder }}</option>
+  @if (required) {
+  <option [value]="''">-</option>
+  } @for (item of items; track $index) {
+  <option class="dropdown-value" [value]="item">{{ item }}</option>
   }
 </select>

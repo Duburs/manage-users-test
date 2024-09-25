@@ -2,17 +2,24 @@
 @import "ag-grid-community/styles/ag-grid.css";
 @import "ag-grid-community/styles/ag-theme-quartz.css";
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
 input {
-  min-width: 400px;
-  width: 40%;
+  width: 200px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
 }
 
 select {
-  min-width: 400px;
-  width: 40%;
+  width: 200px;
   padding: 12px 20px;
   box-sizing: border-box;
 }
