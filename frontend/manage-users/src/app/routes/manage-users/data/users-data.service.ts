@@ -106,11 +106,7 @@ export class UsersDataService {
       );
     }
 
-    this.filteredUsers$ = from(getDocs(q)).pipe(
-      map((querySnapshot) => {
-        return querySnapshot.docs.map((doc) => doc.data()) as User[];
-      })
-    );
+    this.filteredUsers$ = from(collectionData(q, { idField: 'id' }));
 
     // Sets the observable to the new filtered users
     this.currentDataSource$.next(SourceType.FILTERED);
