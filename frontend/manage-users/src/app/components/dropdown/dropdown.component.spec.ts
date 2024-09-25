@@ -8,9 +8,8 @@ describe('DropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DropdownComponent]
-    })
-    .compileComponents();
+      imports: [DropdownComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DropdownComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,10 @@ describe('DropdownComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set value', () => {
+    component.writeValue('test');
+    expect(component.value).toEqual('test');
   });
 });

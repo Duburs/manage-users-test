@@ -73,7 +73,6 @@ export class UsersDataService {
   }
 
   filterData(username: string, role: string): void {
-    console.log('Filtering data', username, role);
     if (!username && !role) {
       this.clearFilters();
       return;

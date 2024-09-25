@@ -60,7 +60,7 @@ export class ViewUsersComponent {
     },
     {
       field: 'username',
-
+      minWidth: 120,
       editable: (e) => e.data.enabled === true,
       onCellValueChanged: (event) =>
         this.usersDataService.updateUser(event.data),
@@ -69,6 +69,7 @@ export class ViewUsersComponent {
       field: 'role',
       editable: (e) => e.data.enabled === true,
       cellEditor: 'agSelectCellEditor',
+      minWidth: 120,
       cellEditorParams: {
         values: [...Object.values(Roles)],
       },
@@ -81,6 +82,7 @@ export class ViewUsersComponent {
         return new Date(params.value?.seconds * 1000)?.toLocaleString();
       },
       editable: false,
+      minWidth: 120,
       headerValueGetter: () => 'Creation Date',
     },
     {
@@ -140,6 +142,7 @@ export class ViewUsersComponent {
       this.roleFilterValue = '';
     }
     this.filterRole = value;
-    this.search();
+    // Skipping the debounce to avoid the delay when the user selects the filter.
+    this.performSearch();
   }
 }
