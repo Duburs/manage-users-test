@@ -80,7 +80,6 @@ export class AddUsersComponent {
   }
 
   submit(): void {
-    console.log(this.addUserForm);
     this.addUserForm.markAllAsTouched();
     this.addUserForm.updateValueAndValidity();
     if (!this.addUserForm.valid) {

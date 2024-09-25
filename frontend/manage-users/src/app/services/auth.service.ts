@@ -1,7 +1,14 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Auth, User } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  signInAnonymously,
+  signInWithPopup,
+  User,
+  UserCredential,
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -27,4 +34,16 @@ export class AuthService {
   uid = computed(() => {
     return this.user()?.displayName ?? 'anonymous';
   });
+
+  byGoogle(): Promise<UserCredential> {
+    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+
+  anonymously(): Promise<UserCredential> {
+    return signInAnonymously(this.auth);
+  }
+
+  logout(): void {
+    this.auth.signOut();
+  }
 }

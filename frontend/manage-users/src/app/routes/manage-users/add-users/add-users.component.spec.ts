@@ -11,7 +11,14 @@ describe('AddUsersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AddUsersComponent],
-      providers: [AngularFirestore, UsersDataService],
+      providers: [
+        {
+          provide: UsersDataService,
+          useValue: {
+            addUser: () => {},
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddUsersComponent);
@@ -24,14 +31,15 @@ describe('AddUsersComponent', () => {
   });
 
   it('should add and remove users', () => {
-    component.addNewUser();
     expect(component.addUserForm.length).toEqual(1);
-
     component.addNewUser();
     expect(component.addUserForm.length).toEqual(2);
 
+    component.addNewUser();
+    expect(component.addUserForm.length).toEqual(3);
+
     component.remove(0);
 
-    expect(component.addUserForm.length).toEqual(1);
+    expect(component.addUserForm.length).toEqual(2);
   });
 });

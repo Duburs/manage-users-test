@@ -1,11 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { ActivatedRoute } from '@angular/router';
+import { provideRouter, RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { AuthService } from './services/auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, ActivatedRoute],
+      imports: [AppComponent],
+      providers: [
+        provideRouter([]),
+        {
+          provide: AuthService,
+          useValue: {},
+        },
+      ],
     }).compileComponents();
   });
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridRemoveButtonComponent } from './grid-remove-button.component';
+import { UsersDataService } from '../../data/users-data.service';
 
 describe('GridRemoveButtonComponent', () => {
   let component: GridRemoveButtonComponent;
@@ -8,9 +9,16 @@ describe('GridRemoveButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GridRemoveButtonComponent]
-    })
-    .compileComponents();
+      imports: [GridRemoveButtonComponent],
+      providers: [
+        {
+          provide: UsersDataService,
+          useValue: {
+            removeUser: () => {},
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GridRemoveButtonComponent);
     component = fixture.componentInstance;
