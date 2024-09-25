@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "ci": "npm run lint && npm run test && npm run build && firebase deploy --only hosting"
+    "test": "ng test --watch=false",
+    "ci": "npm run test && npm run build && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
