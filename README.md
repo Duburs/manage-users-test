@@ -1,4 +1,4 @@
-# ManageUsers
+# Manage Users
 This repository is a firebase application which contains: 
   - A simple Angular application to manage users. The application allows to add, edit, delete and view users.
   - A firebase function to delete users
