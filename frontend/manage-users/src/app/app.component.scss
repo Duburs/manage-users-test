@@ -1,4 +1,22 @@
 .app-body-container {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 80vh;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(20, 119, 177);
+  border-bottom: 1px solid #e9ecef;
+  color: white;
+
+  a:visited,
+  a:link,
+  a:active {
+    color: white;
+    text-decoration: none;
+  }
 }

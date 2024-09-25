@@ -1,0 +1,6 @@
+<select id="add-users-dropdown" [(ngModel)]="value">
+  <option disabled>Select a role</option>
+  @for (item of items; track $index) {
+  <option [value]="item">{{ item }}</option>
+  }
+</select>

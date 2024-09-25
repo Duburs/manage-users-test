@@ -1,1 +1,32 @@
-<p>view-users works!</p>
+<div class="view-users-filters-container">
+  <h3>Filters :</h3>
+  <div class="view-users-filter-container">
+    <input
+      placeholder="filter by a username"
+      [(ngModel)]="usernameFilterValue"
+      (ngModelChange)="search()"
+    />
+  </div>
+
+  <label for="view-users-roles-filter"> Roles </label>
+  <app-button-toggle
+    id="view-users-roles-filter"
+    (isTicked)="handleRoleFilterChange($event)"
+  ></app-button-toggle>
+  @if ( filterRole ) {
+  <app-dropdown
+    [items]="roles"
+    [(ngModel)]="roleFilterValue"
+    (ngModelChange)="search()"
+  >
+  </app-dropdown>
+  }
+</div>
+
+<a routerLink="/manage-users/add">Add Users</a>
+<ag-grid-angular
+  class="view-users-table ag-theme-quartz"
+  [rowData]="rowData | async"
+  [columnDefs]="colDefs"
+  [gridOptions]="gridOptions"
+/>

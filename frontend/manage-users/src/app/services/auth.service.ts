@@ -12,7 +12,6 @@ export class AuthService {
   private user$ = new Observable((obs) => {
     return this.auth.onAuthStateChanged(
       (user) => {
-        console.log('user', user);
         return obs.next(user);
       },
       (err) => obs.error(err),

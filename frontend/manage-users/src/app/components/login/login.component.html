@@ -3,5 +3,5 @@
 <button (click)="anonymously()">Sign in as anonymous</button>
 <div id="firebaseui-auth-container"></div>
 } @else {
-<h2>Welcome</h2>
+<h2>Welcome {{ authService.uid() }}</h2>
 }

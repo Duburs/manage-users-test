@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["firestore"]
+  "cSpell.words": ["firestore"],
+  "eslint.workingDirectories": ["functions"]
 }

@@ -11,20 +11,28 @@
       />
     </div>
 
-    <div class="add-users-field">
-      <label [for]="'role-' + $index"> Role </label>
-      <input [formControl]="userForm.controls.role" />
-    </div>
-    <button (click)="remove($index)">remove this user</button>
+    <label class="add-users-dropdown">
+      <span> Roles </span>
+      <app-dropdown
+        [items]="roles"
+        [formControl]="userForm.controls.role"
+      ></app-dropdown>
+    </label>
+
+    @if($index !== 0) {
+
+    <button class="add-users-action-button" (click)="remove($index)">
+      <b> - Remove this user </b>
+    </button>
+
+    }
   </div>
   }
 
   <!-- I would have this be a + icon instead of a button -->
-  <button class="add-users-add-user" (click)="addNewUser()">
-    Add another user
+  <button class="add-users-action-button" (click)="addNewUser()">
+    <b> + Add additional user </b>
   </button>
 
-  <div>
-    <button (click)="submit()">Submit</button>
-  </div>
+  <button class="add" (click)="submit()">Submit</button>
 </div>
